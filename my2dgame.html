@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="300"></canvas>
+
+<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+	var x = canvas.width/2;
+	var y = canvas.height-30;
+	var dx = 2;
+	var dy = -2;
+	var ballRadius = 10;
+	var paddleHeight = 10;
+	var paddleWidth = 75;
+	var paddleX = (canvas.width-paddleWidth)/2;
+	var rightPressed = false;
+	var leftPressed = false;
+	ctx.beginPath();
+	ctx.rect(160, 0,80, 30);
+	
+	ctx.fillStyle = "lightblue";
+	ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+
+	ctx.arc(200, 160, 10, 0, Math.PI*2, false);
+	ctx.fillStyle = "lightblue";
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.rect(160, 0, 80, 30);
+	ctx.strokeStyle = "rgba(10, 10, 200, 0.5)";
+	ctx.stroke();
+	
+	ctx.closePath();
+
+	function draw() {
+		 ctx.clearRect(160, 30, canvas.width, canvas.height);
+    ctx.beginPath();
+	ctx.arc(x, y, 10, 0, Math.PI*2);
+	ctx.fillStyle = "lightblue";
+	ctx.fill();
+	ctx.closePath();
+
+	function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBall();
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+    }
+    function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+    document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+}
+    
+}
+	x += dx;
+    y += dy;
+}
+setInterval(draw, 10);
+
+
+</script>
+
+</body>
+</html>
